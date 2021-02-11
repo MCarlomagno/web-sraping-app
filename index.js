@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const { parse } = require('json2csv');
 const autoScroll = require('./utils/autoscroll');
-const scrapeItem = require('./utils/itemScraper');
+const {scrapeItem, scrapeCatalog} = require('./utils/scraper');
 const getPage = require('./utils/browser');
 const fs = require('fs');
 
@@ -21,28 +21,44 @@ const fs = require('fs');
     console.log("loading items page...");
     let page = await getPage(browser, url);
 
-    // gets the links from each item.
-    let links = await page.evaluate(async () => {
-        let links = Array.from(document.querySelectorAll('a[itemprop="itemListElement"]')).map(el => el.href);
-        return links;
-    });
+    const scrapEachItem = false;
 
-    for(let itemUrl of links) {
-        console.log(`scraping item: ${links.indexOf(itemUrl) + 1}/${links.length}`);
+    if(scrapEachItem){    // gets the links from each item.
+        let links = await page.evaluate(async () => {
+            let links = Array.from(document.querySelectorAll('a[itemprop="itemListElement"]')).map(el => el.href);
+            return links;
+        });
+
+        for(let itemUrl of links) {
+            console.log(`scraping item: ${links.indexOf(itemUrl) + 1}/${links.length}`);
+            try {
+                let itemPage = await getPage(browser, itemUrl);
+                await autoScroll(itemPage);
+                const itemData = await scrapeItem(itemPage);
+                await itemPage.close();
+
+                const newRow = {
+                    title: itemData.title, 
+                    url: itemUrl,
+                    cost: itemData.cost,
+                    currency: itemData.currency,
+                    pictureURL: itemData.pictureURL
+                };
+                content.push(newRow);
+
+                // save the data in a csv 
+                // at the project root.
+                const csv = parse(content, opts);
+                fs.writeFileSync('data.csv', csv);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    } else {
+        console.log("scraping...");
         try {
-            let itemPage = await getPage(browser, itemUrl);
-            await autoScroll(itemPage);
-            const itemData = await scrapeItem(itemPage);
-            await itemPage.close();
-
-            const newRow = {
-                title: itemData.title, 
-                url: itemUrl,
-                cost: itemData.cost,
-                currency: itemData.currency,
-                pictureURL: itemData.pictureURL
-            };
-            content.push(newRow);
+            await autoScroll(page);
+            let content = await scrapeCatalog(page);
 
             // save the data in a csv 
             // at the project root.
