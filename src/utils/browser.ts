@@ -1,6 +1,6 @@
 // recieves the browser and the
 // url and returns the page.
-async function getPage(browser, url) {
+export async function getPage(browser: any, url: string) {
     const page = await browser.newPage();
     await page.goto(url);
     await page.setViewport({
@@ -9,5 +9,3 @@ async function getPage(browser, url) {
     });
     return page;
 }
-
-module.exports = getPage;

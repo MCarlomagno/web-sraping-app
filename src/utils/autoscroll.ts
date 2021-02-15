@@ -1,12 +1,12 @@
-// automatically scrolls to the 
+// automatically scrolls to the
 // page bottom.
-async function autoScroll(page) {
+export async function autoScroll(page: any) {
     await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
+        await new Promise<void>((resolve, reject) => {
+            let totalHeight = 0;
+            const distance = 100;
+            const timer = setInterval(() => {
+                const scrollHeight = document.body.scrollHeight;
                 window.scrollBy(0, distance);
                 totalHeight += distance;
 
@@ -18,5 +18,3 @@ async function autoScroll(page) {
         });
     });
 }
-
-module.exports = autoScroll;
