@@ -15,59 +15,40 @@ const fs = require('fs');
     // to measure time.
     const start = new Date();
 
-    let url = 'https://www.farfetch.com/ae/shopping/women/skirts-1/items.aspx'; 
+    let pageNumber = 1;
+    
     let browser = await puppeteer.launch();
 
-    console.log("loading items page...");
-    let page = await getPage(browser, url);
-
-    const scrapEachItem = false;
-
-    if(scrapEachItem){    // gets the links from each item.
-        let links = await page.evaluate(async () => {
-            let links = Array.from(document.querySelectorAll('a[itemprop="itemListElement"]')).map(el => el.href);
-            return links;
-        });
-
-        for(let itemUrl of links) {
-            console.log(`scraping item: ${links.indexOf(itemUrl) + 1}/${links.length}`);
-            try {
-                let itemPage = await getPage(browser, itemUrl);
-                await autoScroll(itemPage);
-                const itemData = await scrapeItem(itemPage);
-                await itemPage.close();
-
-                const newRow = {
-                    title: itemData.title, 
-                    url: itemUrl,
-                    cost: itemData.cost,
-                    currency: itemData.currency,
-                    pictureURL: itemData.pictureURL
-                };
-                content.push(newRow);
-
-                // save the data in a csv 
-                // at the project root.
-                const csv = parse(content, opts);
-                fs.writeFileSync('data.csv', csv);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-    } else {
-        console.log("scraping...");
+    while(pageNumber <= 1) {
+        let url = `https://www.farfetch.com/ae/shopping/women/skirts-1/items.aspx?page=${pageNumber}&view=90`;
+        console.log("scraping page number: " + pageNumber);
         try {
+            let startTime = new Date();
+
+            // loads the current page in browser
+            // scrolls and collects and collects the data
+            let page = await getPage(browser, url);
             await autoScroll(page);
-            let content = await scrapeCatalog(page);
+            content.push(...await scrapeCatalog(page));
+            await page.close();
 
             // save the data in a csv 
             // at the project root.
             const csv = parse(content, opts);
-            fs.writeFileSync('data.csv', csv);
+            fs.writeFileSync('data/data-skirts-farfetch.csv', csv);
+
+            // To display every
+            // page duration
+            let endTime = new Date();
+            let pageDuration = (endTime - startTime) / 1000;
+            console.log("page duration in seconds: " + pageDuration);
         } catch (err) {
             console.error(err);
         }
+        
+        pageNumber++;
     }
+
 
 
     const end = new Date();
