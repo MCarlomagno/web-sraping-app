@@ -1,6 +1,6 @@
 # web-sraping-farfetch
 ## Summary
-Scraps the Fatfetch page and creates a CSV file with each item metadata.
+Node.js + typescript application that scraps catalog pages and creates a CSV file with the items metadata.
 
 ## Setup
 ```
