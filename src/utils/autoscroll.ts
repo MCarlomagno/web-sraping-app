@@ -1,6 +1,9 @@
 // automatically scrolls to the
+
+import { Page } from "puppeteer/lib/cjs/puppeteer/common/Page";
+
 // page bottom.
-export async function autoScroll(page: any) {
+export async function autoScroll(page: Page): Promise<void> {
     await page.evaluate(async () => {
         await new Promise<void>((resolve, reject) => {
             let totalHeight = 0;
