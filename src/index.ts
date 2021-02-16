@@ -1,6 +1,8 @@
 import puppeteer from 'puppeteer';
-import { Pages } from './enums/pages-enum';
-import { scrapeFatfetch } from './pages/farfetch';
+import { Category } from './enums/category.enum';
+import { Pages } from './enums/pages.enum';
+import { Farfetch } from './pages/farfetch';
+import { scrapeMaxMara } from './pages/max-mara';
 import { scrapeRiverIsland } from './pages/river-island';
 
 (async () => {
@@ -10,16 +12,21 @@ import { scrapeRiverIsland } from './pages/river-island';
 
     const browser = await puppeteer.launch();
 
-    const selectedPage: number = Pages.RIVERISLAND;
+    const selectedPage: number = Pages.FARFETCH;
+    const selectedCategory: Category = Category.TOPS;
 
     switch(selectedPage) {
         case Pages.FARFETCH: {
-            await scrapeFatfetch(browser);
-           break;
+            await Farfetch.scrap(browser, selectedCategory);
+            break;
         }
         case Pages.RIVERISLAND: {
            await scrapeRiverIsland(browser);
            break;
+        }
+        case Pages.MAXMARA: {
+            await scrapeMaxMara(browser);
+            break;
         }
         default: {
            console.log("no option selected")
