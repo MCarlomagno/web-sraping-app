@@ -12,17 +12,17 @@ export async function scrapeRiverIsland(browser: Browser) {
     const fields = ['title', 'url', 'cost', 'currency', 'pictureURL'];
     const content: any[] = [];
     const opts = { fields };
-    const baseUrl = `https://www.riverisland.com/`;
     const url = `https://www.riverisland.com/c/women/skirts`;
     try {
         const startTime = new Date();
 
         // loads the current page in browser
-        // scrolls and collects and collects the data
         const catalogPage: Page = await getPage(browser, url);
-        // await autoScroll(catalogPage);
         const itemUrls = await getCatalogItems(catalogPage);
         await catalogPage.close();
+
+        // iterates in each one of the
+        // urls previously extracted from catalog.
         for(const itemUrl of itemUrls) {
             const itemPage: Page = await getPage(browser, itemUrl);
             const itemData = await scrapeItem(itemPage);
@@ -34,7 +34,7 @@ export async function scrapeRiverIsland(browser: Browser) {
         console.log(content);
 
         // save the data in a csv
-        // at the project root.
+        // in data folder.
         const csv = parse(content, opts);
         fs.writeFileSync('data/data-skirts-river-island.csv', csv);
 
