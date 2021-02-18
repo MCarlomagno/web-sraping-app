@@ -3,7 +3,7 @@ import { autoScroll } from'../utils/autoscroll';
 import { getPage } from '../utils/browser';
 import fs from 'fs';
 import { Browser } from 'puppeteer/lib/cjs/puppeteer/common/Browser';
-import { Category } from '../enums/category.enum';
+import { Category } from '../enum/category.enum';
 
 export class Farfetch {
 
@@ -55,11 +55,11 @@ export class Farfetch {
         else if(category === Category.DRESSES) url = `https://www.farfetch.com/ae/shopping/women/clothing-1/items.aspx?page=${pageNumber}&view=90&category=135979`;
         else if(category === Category.BLAZERS) url = `https://www.farfetch.com/ae/shopping/women/clothing-1/items.aspx?page=${pageNumber}&view=90&category=136229`;
         else if(category === Category.ACCESSORIES) url = `https://www.farfetch.com/ae/shopping/women/accessories-all-1/items.aspx?page=${pageNumber}&view=90`;
-        else if(category === Category.OUTWEAR) url = `https://www.farfetch.com/ae/shopping/women/clothing-1/items.aspx?page=${pageNumber}&view=90&category=136228|136230|136231|136482|136235|136495|136491|136232|136233|136234|136490|136236|136237`;
+        else if(category === Category.OUTWEAR) url = `https://www.farfetch.com/ae/shopping/women/jackets-1/items.aspx?view=90&category=136234|136232|136235|136228&page=${pageNumber}`;
         else if(category === Category.KNITWEAR) url = `https://www.farfetch.com/ae/shopping/women/clothing-1/items.aspx?page=${pageNumber}&view=90&category=136245`;
         else if(category === Category.SHOES) url = `https://www.farfetch.com/ae/shopping/women/shoes-1/items.aspx?page=${pageNumber}&view=90&scale=274`;
         else if(category === Category.JEANS) url = `https://www.farfetch.com/ae/shopping/women/clothing-1/items.aspx?page=${pageNumber}&view=90&category=136043`;
-        else url = `https://www.farfetch.com/ae/shopping/women/skirts-1/items.aspx?page=${pageNumber}&view=90`;
+        else throw new Error("Not implemented.");
 
         return url;
     }
@@ -73,7 +73,7 @@ export class Farfetch {
         else if (category === Category.DRESSES) pagesQuantity = 112;
         else if (category === Category.BLAZERS) pagesQuantity = 24;
         else if (category === Category.ACCESSORIES) pagesQuantity = 193;
-        else if (category === Category.OUTWEAR) pagesQuantity = 40;
+        else if (category === Category.OUTWEAR) pagesQuantity = 19;
         else if (category === Category.KNITWEAR) pagesQuantity = 88;
         else if (category === Category.SHOES) pagesQuantity = 224;
         else if (category === Category.JEANS) pagesQuantity = 29;

@@ -1,19 +1,20 @@
 import puppeteer from 'puppeteer';
-import { Category } from './enums/category.enum';
-import { Pages } from './enums/pages.enum';
+import { Category } from './enum/category.enum';
+import { Pages } from './enum/pages.enum';
+import { Bershka } from './pages/bershka';
 import { Farfetch } from './pages/farfetch';
-import { scrapeMaxMara } from './pages/max-mara';
-import { scrapeRiverIsland } from './pages/river-island';
+import { MaxMara } from './pages/max-mara';
+import { RiverIsland } from './pages/river-island';
+import { SteveMadden } from './pages/steve-madden';
 
 (async () => {
 
     // to measure time.
     const start = new Date();
-
     const browser = await puppeteer.launch();
 
-    const selectedPage: number = Pages.FARFETCH;
-    const selectedCategory: Category = Category.TOPS;
+    const selectedPage: number = Pages.BERSHKA;
+    const selectedCategory: Category = Category.PANTS;
 
     switch(selectedPage) {
         case Pages.FARFETCH: {
@@ -21,11 +22,19 @@ import { scrapeRiverIsland } from './pages/river-island';
             break;
         }
         case Pages.RIVERISLAND: {
-           await scrapeRiverIsland(browser);
+           await RiverIsland.scrap(browser, selectedCategory);
            break;
         }
         case Pages.MAXMARA: {
-            await scrapeMaxMara(browser);
+            await MaxMara.scrap(browser, selectedCategory);
+            break;
+        }
+        case Pages.STEVEMADDEN: {
+            await SteveMadden.scrap(browser, selectedCategory);
+            break;
+        }
+        case Pages.BERSHKA: {
+            await Bershka.scrap(browser, selectedCategory);
             break;
         }
         default: {
