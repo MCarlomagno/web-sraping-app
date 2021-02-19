@@ -7,7 +7,20 @@ import { Page } from "puppeteer/lib/cjs/puppeteer/common/Page";
 import { Category } from "../enum/category.enum";
 import { ItemData } from "../models/item-data.model";
 
+enum AccessoriesCategories {
+    BELTS = "BELTS",
+    SUNGLASSES = "SUNGLASSES",
+    PURSES = "PURSES"
+}
+
 export class MaxMara {
+
+    static accessoriesCategories = [
+        "BELTS",
+        "SUNGLASSES",
+        "PURSES"
+    ]
+
     static async scrap(browser: Browser, category: Category) {
 
         // CSV definitions.
@@ -17,21 +30,34 @@ export class MaxMara {
         let pageNumber = 1;
 
         console.log("pages quantity: " + this.getPagesQuantity(category));
-        console.log("page url: " + this.getUrl(category, pageNumber));
         const startTime = new Date();
 
         while(pageNumber <= this.getPagesQuantity(category)) {
             try {
-                console.log("scraping page number: " + pageNumber);
                 const start = new Date();
-                const url = this.getUrl(category, pageNumber);
 
-                // loads the current page in browser
-                const catalogPage: Page = await getPage(browser, url);
-                await autoScroll(catalogPage);
+                if(category === Category.ACCESSORIES) {
+                    for(const subcategory of this.accessoriesCategories) {
+                        const url = this.getUrl(category, pageNumber, subcategory);
 
-                content.push(... await this.scrapeMaxMaraCatalog(catalogPage, category));
-                await catalogPage.close();
+                        // loads the current page in browser
+                        const catalogPage: Page = await getPage(browser, url);
+                        await autoScroll(catalogPage);
+
+                        content.push(... await this.scrapeMaxMaraCatalog(catalogPage, category));
+                        await catalogPage.close();
+                    }
+                } else {
+                    const url = this.getUrl(category, pageNumber);
+
+                    // loads the current page in browser
+                    const catalogPage: Page = await getPage(browser, url);
+                    await autoScroll(catalogPage);
+
+                    content.push(... await this.scrapeMaxMaraCatalog(catalogPage, category));
+                    await catalogPage.close();
+                }
+
 
                 // save the data in a csv
                 // in data folder.
@@ -53,7 +79,7 @@ export class MaxMara {
         console.log("duration in seconds: " + duration);
     }
 
-    private static getUrl(category: Category, pageNumber: number) {
+    private static getUrl(category: Category, pageNumber: number, subcategory?: string) {
         let url = "";
 
         if(category === Category.SKIRTS) url = `https://world.maxmara.com/clothing/skirts?page=${pageNumber}`;
@@ -61,7 +87,9 @@ export class MaxMara {
         else if(category === Category.PANTS) url = `https://world.maxmara.com/clothing/womens-trousers-and-jeans?page=${pageNumber}`;
         else if(category === Category.DRESSES) url = `https://world.maxmara.com/clothing/womens-dresses?page=${pageNumber}`;
         else if(category === Category.BLAZERS) url = `https://world.maxmara.com/coats-and-jackets/womens-jackets-and-blazers?page=${pageNumber}`;
-        else if(category === Category.ACCESSORIES) url = `https://world.maxmara.com/accessories?page=${pageNumber}`;
+        else if(category === Category.ACCESSORIES && subcategory === AccessoriesCategories.BELTS) url = `https://world.maxmara.com/accessories/womens-belts`;
+        else if(category === Category.ACCESSORIES && subcategory === AccessoriesCategories.PURSES) url = `https://world.maxmara.com/accessories/cover-and-coin-purse`;
+        else if(category === Category.ACCESSORIES && subcategory === AccessoriesCategories.SUNGLASSES) url = `https://world.maxmara.com/sales/accessories/womens-sunglasses`;
         else if(category === Category.OUTWEAR) url = `https://world.maxmara.com/coats-and-jackets/womens-down-jackets-and-padded-jackets?page=${pageNumber}`;
         else if(category === Category.KNITWEAR) url = `https://world.maxmara.com/clothing/womens-knitwear-sweaters?page=${pageNumber}`;
         else if(category === Category.SHOES) url = `https://world.maxmara.com/bags-and-shoes/womens-shoes?page=${pageNumber}`;

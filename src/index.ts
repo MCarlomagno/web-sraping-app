@@ -13,8 +13,8 @@ import { SteveMadden } from './pages/steve-madden';
     const start = new Date();
     const browser = await puppeteer.launch();
 
-    const selectedPage: number = Pages.BERSHKA;
-    const selectedCategory: Category = Category.PANTS;
+    const selectedPage: number = Pages.MAXMARA;
+    const selectedCategory: Category = Category.ACCESSORIES;
 
     switch(selectedPage) {
         case Pages.FARFETCH: {
