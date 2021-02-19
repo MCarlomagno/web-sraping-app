@@ -33,7 +33,7 @@ export class Bershka {
             // console.log("catalog after scroll");
             // await page.screenshot({path: 'data/bershka/screenshot_catalog.png'});
 
-            content.push(...await this.scrapeCatalog(page, browser));
+            content.push(...await this.scrapeCatalog(page, browser, category));
             await page.close();
 
             // save the data in a csv
@@ -120,14 +120,22 @@ export class Bershka {
     }
 
     // scraps catalog page
-    private static async scrapeCatalog(page: Page, browser: Browser) {
+    private static async scrapeCatalog(page: Page, browser: Browser, category: Category) {
 
         // gets the items urls.
-        const urls = await page.evaluate(async () => {
-            const items = Array.from(document.querySelectorAll('div[class="grid-card category-product-card"]'));
+        const urls = await page.evaluate(async (category) => {
+            let items: any[] = [];
+
+            // in case of Kniwear, the query changes.
+            if(category !== "KNITWEAR"){
+                items = Array.from(document.querySelectorAll('div[class="grid-card category-product-card"]'));
+            }else {
+                items = Array.from(document.querySelectorAll('div[class="grid-card search-product-card"]'));
+            }
+
             const urls = items.map(item => (item.querySelector('a') as HTMLAnchorElement).href);
             return urls;
-        });
+        }, category);
 
         const content: ItemData[] = [];
         for(const url of urls) {
