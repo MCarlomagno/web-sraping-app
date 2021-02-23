@@ -1,8 +1,12 @@
 import puppeteer from 'puppeteer';
+import { Page } from 'puppeteer/lib/cjs/puppeteer/common/Page';
 import { Category } from './enum/category.enum';
 import { Pages } from './enum/pages.enum';
+import { sourceData } from './sources/source-data';
+import { PageData } from './models/page-data';
 import { Bershka } from './pages/bershka';
 import { Farfetch } from './pages/farfetch';
+import { Fendi } from './pages/fendi';
 import { MaxMara } from './pages/max-mara';
 import { RiverIsland } from './pages/river-island';
 import { SteveMadden } from './pages/steve-madden';
@@ -13,28 +17,39 @@ import { SteveMadden } from './pages/steve-madden';
     const start = new Date();
     const browser = await puppeteer.launch();
 
-    const selectedPage: number = Pages.MAXMARA;
-    const selectedCategory: Category = Category.ACCESSORIES;
+    const selectedCategory: Category = Category.SKIRTS;
+    const selectedPage: string = Pages.RIVERISLAND;
+    const pageData: PageData = sourceData[selectedPage][selectedCategory];
 
     switch(selectedPage) {
         case Pages.FARFETCH: {
-            await Farfetch.scrap(browser, selectedCategory);
+            const page = new Farfetch();
+            await page.scrap(browser, selectedCategory, pageData);
             break;
         }
         case Pages.RIVERISLAND: {
-           await RiverIsland.scrap(browser, selectedCategory);
+            const page = new RiverIsland();
+            await page.scrap(browser, selectedCategory, pageData);
            break;
         }
         case Pages.MAXMARA: {
-            await MaxMara.scrap(browser, selectedCategory);
+            const page = new MaxMara();
+            await page.scrap(browser, selectedCategory);
             break;
         }
         case Pages.STEVEMADDEN: {
-            await SteveMadden.scrap(browser, selectedCategory);
+            const page = new SteveMadden();
+            await page.scrap(browser, selectedCategory);
             break;
         }
         case Pages.BERSHKA: {
-            await Bershka.scrap(browser, selectedCategory);
+            const page = new Bershka();
+            await page.scrap(browser, selectedCategory);
+            break;
+        }
+        case Pages.FENDI: {
+            const page = new Fendi();
+            await page.scrap(browser, selectedCategory, pageData);
             break;
         }
         default: {
@@ -42,6 +57,7 @@ import { SteveMadden } from './pages/steve-madden';
            break;
         }
     }
+
 
     const end = new Date();
     const duration = (end.valueOf() - start.valueOf()) / 1000;
