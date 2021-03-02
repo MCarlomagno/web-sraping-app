@@ -28,7 +28,7 @@ export abstract class BasePage {
                 const startTime = new Date();
 
                 // if require pagination
-                let urls = pageData.urls;
+                const urls = pageData.urls;
 
                 for(let url of urls) {
                     if(pageData.hasPagination) {

@@ -181,8 +181,8 @@ export const sourceData: Record<string, any> = {
         },
         accessories: {
             urls: [
-                "https://world.maxmara.com/accessories/womens-belts", 
-                "https://world.maxmara.com/accessories/cover-and-coin-purse", 
+                "https://world.maxmara.com/accessories/womens-belts",
+                "https://world.maxmara.com/accessories/cover-and-coin-purse",
                 "https://world.maxmara.com/sales/accessories/womens-sunglasses"
             ],
             filePath: "data/maxmara/data-accessories-maxmara.csv",
@@ -221,14 +221,14 @@ export const sourceData: Record<string, any> = {
     },
     steveMadden: {
         accessories: {
-            url: ["https://stevemadden.me/collections/handbags-all-handbags?page="],
+            urls: ["https://stevemadden.me/collections/handbags-all-handbags?page="],
             filePath: "data/stevemadden/data-accessories-stevemadden.csv",
             pagesQuantity: 4,
             hasPagination: true,
             requireAutoScroll: true
         },
         shoes: {
-            url: ["https://stevemadden.me/collections/womens?page="],
+            urls: ["https://stevemadden.me/collections/womens?page="],
             filePath: "data/stevemadden/data-shoes-stevemadden.csv",
             pagesQuantity: 5,
             hasPagination: true,
@@ -237,70 +237,70 @@ export const sourceData: Record<string, any> = {
     },
     bershka: {
         skirts: {
-            url: ["https://www.bershka.com/ww/women/clothes/skirts-c1010193224.html?page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/skirts-c1010193224.html?page="],
             filePath: "data/bershka/data-skirts-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         tops: {
-            url: ["https://www.bershka.com/ww/women/clothes/t-shirts-and-tops-c1010193217.html?page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/t-shirts-and-tops-c1010193217.html?page="],
             filePath: "data/bershka/data-tops-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         pants: {
-            url: ["https://www.bershka.com/ww/women/clothes/trousers-c1010193216.html?page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/trousers-c1010193216.html?page="],
             filePath: "data/bershka/data-pants-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         dresses: {
-            url: ["https://www.bershka.com/ww/women/clothes/dresses-c1010193213.html?page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/dresses-c1010193213.html?page="],
             filePath: "data/bershka/data-dresses-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         blazers: {
-            url: ["https://www.bershka.com/ww/women/clothes/blazers-c1010205537.html?page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/blazers-c1010205537.html?page="],
             filePath: "data/bershka/data-blazers-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         accessories: {
-            url: ["https://www.bershka.com/ww/women/accessories-c1010193134.html?page="],
+            urls: ["https://www.bershka.com/ww/women/accessories-c1010193134.html?page="],
             filePath: "data/bershka/data-accessories-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         outwear: {
-            url: ["https://www.bershka.com/ww/women/clothes/jackets-and-coats-c1010193212.html?tipology=1010193261&page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/jackets-and-coats-c1010193212.html?tipology=1010193261&page="],
             filePath: "data/bershka/data-outwear-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         knitwear: {
-            url: ["https://www.bershka.com/ww/q/knitwear?page="],
+            urls: ["https://www.bershka.com/ww/q/knitwear?page="],
             filePath: "data/bershka/data-knitwear-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         shoes: {
-            url: ["https://www.bershka.com/ww/women/shoes-c1010193192.html?page="],
+            urls: ["https://www.bershka.com/ww/women/shoes-c1010193192.html?page="],
             filePath: "data/bershka/data-shoes-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         jeans: {
-            url: ["https://www.bershka.com/ww/women/clothes/jeans-c1010276029.html?page="],
+            urls: ["https://www.bershka.com/ww/women/clothes/jeans-c1010276029.html?page="],
             filePath: "data/bershka/data-jeans-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
@@ -309,62 +309,134 @@ export const sourceData: Record<string, any> = {
     },
     fendi: {
         skirts: {
-            url: "https://www.fendi.com/ae/search-results?q=skirt",
+            urls: ["https://www.fendi.com/ae/search-results?q=skirt"],
             filePath: "data/fendi/data-skirts-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         tops: {
-            url: "https://www.fendi.com/ae/ready-to-wear-woman/tops-and-shirts",
+            urls: ["https://www.fendi.com/ae/ready-to-wear-woman/tops-and-shirts"],
             filePath: "data/fendi/data-tops-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         pants: {
-            url: "https://www.fendi.com/ae/search-results?q=trousers&page=3&preload=true",
+            urls: ["https://www.fendi.com/ae/search-results?q=trousers&page=3&preload=true"],
             filePath: "data/fendi/data-pants-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         dresses: {
-            url: "https://www.fendi.com/ae/ready-to-wear-woman/dresses",
+            urls: ["https://www.fendi.com/ae/ready-to-wear-woman/dresses"],
             filePath: "data/fendi/data-dresses-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         blazers: {
-            url: "https://www.fendi.com/ae/ready-to-wear-woman/jackets",
+            urls: ["https://www.fendi.com/ae/ready-to-wear-woman/jackets"],
             filePath: "data/fendi/data-blazers-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         accessories: {
-            url: "https://www.fendi.com/ae/wallets-small-accessories-woman?q=:relevance&page=2&preload=true",
+            urls: ["https://www.fendi.com/ae/wallets-small-accessories-woman?q=:relevance&page=2&preload=true"],
             filePath: "data/fendi/data-accessories-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         outwear: {
-            url: "https://www.fendi.com/ae/ready-to-wear-woman/outerwear",
+            urls: ["https://www.fendi.com/ae/ready-to-wear-woman/outerwear"],
             filePath: "data/fendi/data-outwear-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         knitwear: {
-            url: "https://www.fendi.com/ae/woman/ready-to-wear/knitwear",
+            urls: ["https://www.fendi.com/ae/woman/ready-to-wear/knitwear"],
             filePath: "data/fendi/data-knitwear-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         shoes: {
-            url: "https://www.fendi.com/ae/shoes-woman?q=:relevance&page=2&preload=true",
+            urls: ["https://www.fendi.com/ae/shoes-woman?q=:relevance&page=2&preload=true"],
             filePath: "data/fendi/data-shoes-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         jeans: {
-            url: "https://www.fendi.com/ae/search-results?q=jean",
+            urls: ["https://www.fendi.com/ae/search-results?q=jean"],
             filePath: "data/fendi/data-jeans-fendi.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        }
+    },
+    chiaraferragni: {
+        skirts: {
+            urls: ["https://row.chiaraferragnicollection.com/collections/skirts"],
+            filePath: "data/chiaraferragni/data-skirts-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        tops: {
+            urls: ["https://row.chiaraferragnicollection.com/collections/top-t-shirt?_usf_take=32"],
+            filePath: "data/chiaraferragni/data-tops-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        pants: {
+            urls: ["https://row.chiaraferragnicollection.com/collections/pants-shorts?_usf_take=32"],
+            filePath: "data/chiaraferragni/data-pants-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        dresses: {
+            urls: ["https://row.chiaraferragnicollection.com/collections/dresses?_usf_take=32"],
+            filePath: "data/chiaraferragni/data-dresses-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        blazers: {
+            urls: ["https://row.chiaraferragnicollection.com/collections/blazers-jackets"],
+            filePath: "data/chiaraferragni/data-blazers-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        accessories: {
+            urls: [
+                "https://row.chiaraferragnicollection.com/collections/bags-bagpacks?_usf_take=32",
+                "https://row.chiaraferragnicollection.com/collections/small-leather-goods?_usf_take=32",
+                "https://row.chiaraferragnicollection.com/collections/belts",
+                "https://row.chiaraferragnicollection.com/collections/socks",
+            ],
+            filePath: "data/chiaraferragni/data-accessories-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        outwear: {
+            urls: ["https://row.chiaraferragnicollection.com/collections/coats"],
+            filePath: "data/chiaraferragni/data-outwear-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        knitwear: {
+            urls: ["https://row.chiaraferragnicollection.com/search?q=knit"],
+            filePath: "data/chiaraferragni/data-knitwear-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        shoes: {
+            urls: [
+                "https://row.chiaraferragnicollection.com/collections/sneakers",
+                "https://row.chiaraferragnicollection.com/collections/ballerinas",
+                "https://row.chiaraferragnicollection.com/collections/pump",
+                "https://row.chiaraferragnicollection.com/collections/sliders"
+            ],
+            filePath: "data/chiaraferragni/data-shoes-chiaraferragni.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
+        jeans: {
+            urls: ["https://row.chiaraferragnicollection.com/search?q=jeans"],
+            filePath: "data/chiaraferragni/data-jeans-chiaraferragni.csv",
             pagesQuantity: 1,
             hasPagination: false,
         }
