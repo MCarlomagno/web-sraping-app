@@ -18,9 +18,9 @@ import { HudaBeauty } from './pages/huda-beauty';
     const start = new Date();
     const browser = await puppeteer.launch();
 
-    const scrapAll = false;
+    const scrapAll = true;
     const selectedCategory: Category = Category.BEAUTY;
-    const selectedPage: string = Pages.HUDABEAUTY;
+    const selectedPage: string = Pages.FARFETCH;
 
     if(scrapAll) {
         await scrapAllPages();
@@ -28,64 +28,73 @@ import { HudaBeauty } from './pages/huda-beauty';
         await scrapSinglePage(selectedPage, selectedCategory);
     }
 
-
-
     async function scrapAllPages() {
-        // TODO: automated scraping:
-        // Iteration on each paeg key and
-        // each category key to scrap all pages
-        console.log("scrap all pages!");
+        const pages = Object.values(Pages);
+        const categories = Object.values(Category);
+        for(const page of pages) {
+            for(const category of categories) {
+                console.log(`Running Category: "${category}", Page: "${page}"...`)
+                await scrapSinglePage(page, category);
+                console.log(`Finished Category: "${category}", Page: "${page}"...`)
+            }
+        }
     }
 
     async function scrapSinglePage(page: string, category: Category) {
+
         const pageData: PageData = sourceData[page][category];
 
-        switch(selectedPage) {
-            case Pages.FARFETCH: {
-                const page = new Farfetch();
-                await page.scrap(browser, category, pageData);
-                break;
+        if(pageData) {
+            switch(selectedPage) {
+                case Pages.FARFETCH: {
+                    const page = new Farfetch();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                case Pages.RIVERISLAND: {
+                    const page = new RiverIsland();
+                    await page.scrap(browser, category, pageData);
+                   break;
+                }
+                case Pages.MAXMARA: {
+                    const page = new MaxMara();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                case Pages.STEVEMADDEN: {
+                    const page = new SteveMadden();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                case Pages.BERSHKA: {
+                    const page = new Bershka();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                case Pages.FENDI: {
+                    const page = new Fendi();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                case Pages.CHIARAFERRAGNI: {
+                    const page = new ChiaraFerragni();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                case Pages.HUDABEAUTY: {
+                    const page = new HudaBeauty();
+                    await page.scrap(browser, category, pageData);
+                    break;
+                }
+                default: {
+                   console.log("no option selected")
+                   break;
+                }
             }
-            case Pages.RIVERISLAND: {
-                const page = new RiverIsland();
-                await page.scrap(browser, category, pageData);
-               break;
-            }
-            case Pages.MAXMARA: {
-                const page = new MaxMara();
-                await page.scrap(browser, category, pageData);
-                break;
-            }
-            case Pages.STEVEMADDEN: {
-                const page = new SteveMadden();
-                await page.scrap(browser, category, pageData);
-                break;
-            }
-            case Pages.BERSHKA: {
-                const page = new Bershka();
-                await page.scrap(browser, category, pageData);
-                break;
-            }
-            case Pages.FENDI: {
-                const page = new Fendi();
-                await page.scrap(browser, category, pageData);
-                break;
-            }
-            case Pages.CHIARAFERRAGNI: {
-                const page = new ChiaraFerragni();
-                await page.scrap(browser, category, pageData);
-                break;
-            }
-            case Pages.HUDABEAUTY: {
-                const page = new HudaBeauty();
-                await page.scrap(browser, category, pageData);
-                break;
-            }
-            default: {
-               console.log("no option selected")
-               break;
-            }
+        } else {
+            console.log(`The category "${category}" does not exist in "${page}" page.`);
         }
+
     }
 
 

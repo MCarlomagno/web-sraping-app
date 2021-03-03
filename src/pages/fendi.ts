@@ -1,13 +1,5 @@
-import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
-import { PageData } from "../models/page-data";
-import { Category } from "../enum/category.enum";
-import { BasePage } from "../models/base-page";
-import { getPage } from "../utils/browser";
-import { parse } from "json2csv";
-import fs from 'fs';
-import { Page } from "puppeteer/lib/cjs/puppeteer/common/Page";
+import { BasePage } from "../core/base-page";
 import { ItemData } from "../models/item-data.model";
-import { autoScroll } from "../utils/autoscroll";
 import { ScrapingParameters } from "../models/scrape-catalog-params";
 
 export class Fendi extends BasePage{

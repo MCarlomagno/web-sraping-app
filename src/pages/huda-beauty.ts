@@ -1,6 +1,6 @@
 import { ItemData } from "../models/item-data.model";
 import { ScrapingParameters } from "../models/scrape-catalog-params";
-import { BasePage } from "../models/base-page";
+import { BasePage } from "../core/base-page";
 import { autoScroll } from "../utils/autoscroll";
 import { delay } from "../utils/delay";
 
