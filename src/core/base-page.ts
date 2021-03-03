@@ -4,10 +4,10 @@ import { Page } from "puppeteer/lib/cjs/puppeteer/common/Page";
 import { autoScroll } from "../utils/autoscroll";
 import { getPage } from "../utils/browser";
 import { Category } from "../enum/category.enum";
-import { ItemData } from "./item-data.model";
-import { PageData } from "./page-data";
+import { ItemData } from "../models/item-data.model";
+import { PageData } from "../models/page-data";
 import fs from 'fs';
-import { ScrapingParameters } from "./scrape-catalog-params";
+import { ScrapingParameters } from "../models/scrape-catalog-params";
 
 export abstract class BasePage {
     content: ItemData[] = [];

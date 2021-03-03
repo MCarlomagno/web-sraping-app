@@ -1,13 +1,8 @@
-import { parse } from "json2csv";
-import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
-import fs from 'fs';
 import { getPage } from "../utils/browser";
 import { Category } from "../enum/category.enum";
 import { ItemData } from "../models/item-data.model";
-import { BasePage } from "../models/base-page";
+import { BasePage } from "../core/base-page";
 import { Page } from "puppeteer/lib/cjs/puppeteer/common/Page";
-import { PageData } from "../models/page-data";
-import { autoScroll } from "../utils/autoscroll";
 import { ScrapingParameters } from "../models/scrape-catalog-params";
 
 export class RiverIsland extends BasePage {

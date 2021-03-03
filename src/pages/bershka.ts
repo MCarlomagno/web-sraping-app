@@ -1,14 +1,9 @@
-import { parse } from 'json2csv';
 import { autoScroll } from'../utils/autoscroll';
 import { getPage } from '../utils/browser';
-import fs from 'fs';
 import { Browser } from 'puppeteer/lib/cjs/puppeteer/common/Browser';
-import { Category } from '../enum/category.enum';
 import { ItemData } from '../models/item-data.model';
-import { Page } from 'puppeteer/lib/cjs/puppeteer/common/Page';
 import { delay } from '../utils/delay';
-import { BasePage } from '../models/base-page';
-import { PageData } from '../models/page-data';
+import { BasePage } from '../core/base-page';
 import { ScrapingParameters } from '../models/scrape-catalog-params';
 
 export class Bershka extends BasePage{
