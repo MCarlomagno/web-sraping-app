@@ -440,5 +440,13 @@ export const sourceData: Record<string, any> = {
             pagesQuantity: 1,
             hasPagination: false,
         }
+    },
+    hudabeauty: {
+        beauty: {
+            urls: ["https://hudabeauty.com/en_AE/search/updategrid?cgid=makeup&start=0&sz=126"],
+            filePath: "data/hudabeauty/data-beauty-hudabeauty.csv",
+            pagesQuantity: 1,
+            hasPagination: false,
+        },
     }
 };

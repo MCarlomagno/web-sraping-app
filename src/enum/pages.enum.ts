@@ -5,5 +5,6 @@ export enum Pages {
     STEVEMADDEN = 'steveMadden',
     BERSHKA = 'bershka',
     FENDI = 'fendi',
-    CHIARAFERRAGNI = 'chiaraferragni'
+    CHIARAFERRAGNI = 'chiaraferragni',
+    HUDABEAUTY = 'hudabeauty'
 }

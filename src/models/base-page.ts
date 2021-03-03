@@ -10,8 +10,6 @@ import fs from 'fs';
 import { ScrapingParameters } from "./scrape-catalog-params";
 
 export abstract class BasePage {
-
-    // CSV definitions.
     content: ItemData[] = [];
     opts = { fields: ['title', 'url', 'cost', 'currency', 'pictureURL'] };
 
@@ -26,8 +24,6 @@ export abstract class BasePage {
         while(pageNumber <= pageData.pagesQuantity) {
             try {
                 const startTime = new Date();
-
-                // if require pagination
                 const urls = pageData.urls;
 
                 for(let url of urls) {
@@ -35,11 +31,8 @@ export abstract class BasePage {
                         url = url + pageNumber;
                     }
 
-                    // loads the current page in browser
                     const page: Page = await getPage(browser, url);
 
-                    // if the page requires scroll to
-                    // load resources.
                     if(pageData.requireAutoScroll) {
                         await autoScroll(page);
                     }
@@ -47,14 +40,9 @@ export abstract class BasePage {
                     this.content.push(... await this.scrapeCatalog({page, browser, category}));
                     await page.close();
 
-                    // save the data in a csv
-                    // in data folder.
                     const csv = parse(this.content, this.opts);
                     fs.writeFileSync(pageData.filePath, csv);
 
-
-                    // To display every
-                    // page duration.
                     const endTime = new Date();
                     const pageDuration = (endTime.valueOf() - startTime.valueOf()) / 1000;
                     console.log("page duration in seconds: " + pageDuration);
