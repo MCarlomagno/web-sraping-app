@@ -11,56 +11,80 @@ import { MaxMara } from './pages/max-mara';
 import { RiverIsland } from './pages/river-island';
 import { SteveMadden } from './pages/steve-madden';
 import { ChiaraFerragni } from './pages/chiara-ferragni';
+import { HudaBeauty } from './pages/huda-beauty';
 
 (async () => {
 
-    // to measure time.
     const start = new Date();
     const browser = await puppeteer.launch();
 
-    const selectedCategory: Category = Category.JEANS;
-    const selectedPage: string = Pages.CHIARAFERRAGNI;
-    const pageData: PageData = sourceData[selectedPage][selectedCategory];
+    const scrapAll = false;
+    const selectedCategory: Category = Category.BEAUTY;
+    const selectedPage: string = Pages.HUDABEAUTY;
 
-    switch(selectedPage) {
-        case Pages.FARFETCH: {
-            const page = new Farfetch();
-            await page.scrap(browser, selectedCategory, pageData);
-            break;
-        }
-        case Pages.RIVERISLAND: {
-            const page = new RiverIsland();
-            await page.scrap(browser, selectedCategory, pageData);
-           break;
-        }
-        case Pages.MAXMARA: {
-            const page = new MaxMara();
-            await page.scrap(browser, selectedCategory, pageData);
-            break;
-        }
-        case Pages.STEVEMADDEN: {
-            const page = new SteveMadden();
-            await page.scrap(browser, selectedCategory, pageData);
-            break;
-        }
-        case Pages.BERSHKA: {
-            const page = new Bershka();
-            await page.scrap(browser, selectedCategory, pageData);
-            break;
-        }
-        case Pages.FENDI: {
-            const page = new Fendi();
-            await page.scrap(browser, selectedCategory, pageData);
-            break;
-        }
-        case Pages.CHIARAFERRAGNI: {
-            const page = new ChiaraFerragni();
-            await page.scrap(browser, selectedCategory, pageData);
-            break;
-        }
-        default: {
-           console.log("no option selected")
-           break;
+    if(scrapAll) {
+        await scrapAllPages();
+    }else {
+        await scrapSinglePage(selectedPage, selectedCategory);
+    }
+
+
+
+    async function scrapAllPages() {
+        // TODO: automated scraping:
+        // Iteration on each paeg key and
+        // each category key to scrap all pages
+        console.log("scrap all pages!");
+    }
+
+    async function scrapSinglePage(page: string, category: Category) {
+        const pageData: PageData = sourceData[page][category];
+
+        switch(selectedPage) {
+            case Pages.FARFETCH: {
+                const page = new Farfetch();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            case Pages.RIVERISLAND: {
+                const page = new RiverIsland();
+                await page.scrap(browser, category, pageData);
+               break;
+            }
+            case Pages.MAXMARA: {
+                const page = new MaxMara();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            case Pages.STEVEMADDEN: {
+                const page = new SteveMadden();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            case Pages.BERSHKA: {
+                const page = new Bershka();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            case Pages.FENDI: {
+                const page = new Fendi();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            case Pages.CHIARAFERRAGNI: {
+                const page = new ChiaraFerragni();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            case Pages.HUDABEAUTY: {
+                const page = new HudaBeauty();
+                await page.scrap(browser, category, pageData);
+                break;
+            }
+            default: {
+               console.log("no option selected")
+               break;
+            }
         }
     }
 
