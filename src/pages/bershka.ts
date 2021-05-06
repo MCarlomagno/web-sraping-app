@@ -5,10 +5,11 @@ import { ItemData } from '../models/item-data.model';
 import { delay } from '../utils/delay';
 import { BasePage } from '../core/base-page';
 import { ScrapingParameters } from '../models/scrape-catalog-params';
+import { PageData } from '../models/page-data';
 
 export class Bershka extends BasePage{
 
-    async beforeScraping(browser: Browser) {
+    async beforeScraping(browser: Browser, pageData: PageData) {
         const setLocationUrl = 'https://www.bershka.com/?select-store=true';
         const page = await getPage(browser, setLocationUrl);
 
@@ -29,9 +30,9 @@ export class Bershka extends BasePage{
 
             // in case of Kniwear, the query changes.
             if(category !== "knitwear"){
-                items = Array.from(document.querySelectorAll('div[class="grid-card category-product-card"]'));
+                items = Array.from(document.querySelectorAll('div[class="category-product-card"]'));
             }else {
-                items = Array.from(document.querySelectorAll('div[class="grid-card search-product-card"]'));
+                items = Array.from(document.querySelectorAll('div[class="search-product-card"]'));
             }
 
             const urls = items.map(item => (item.querySelector('a') as HTMLAnchorElement).href);

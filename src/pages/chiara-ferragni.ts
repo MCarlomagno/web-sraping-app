@@ -11,7 +11,8 @@ export class ChiaraFerragni extends BasePage{
         await autoScroll(params.page);
 
         const urls = await params.page.evaluate(async () => {
-            const items = Array.from(document.querySelector('div[id="gf-products"]').children);
+            const items = Array.from(document.querySelector('div[id="gf-products"]').children)
+                .filter(item => !(Array.from(item.classList).includes("product-item--sold-out")));
             const urls = [];
             for(const item of items) {
                 urls.push(item.querySelector('a').href);

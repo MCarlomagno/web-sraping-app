@@ -19,7 +19,7 @@ export abstract class BasePage {
         console.log("pages quantity: " + pageData.pagesQuantity);
         console.log("page urls: " + pageData.urls);
 
-        this.beforeScraping(browser);
+        await this.beforeScraping(browser, pageData);
 
         while(pageNumber <= pageData.pagesQuantity) {
             try {
@@ -34,6 +34,7 @@ export abstract class BasePage {
                     const page: Page = await getPage(browser, url);
 
                     if(pageData.requireAutoScroll) {
+                        console.log("scrolling");
                         await autoScroll(page);
                     }
 
@@ -56,5 +57,5 @@ export abstract class BasePage {
     }
 
     abstract scrapeCatalog(params: ScrapingParameters): Promise<ItemData[]>;
-    beforeScraping(browser: Browser): Promise<void> {return;};
+    beforeScraping(browser: Browser, pageData: PageData): Promise<void> {return;};
 }

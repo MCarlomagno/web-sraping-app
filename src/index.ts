@@ -12,15 +12,16 @@ import { RiverIsland } from './pages/river-island';
 import { SteveMadden } from './pages/steve-madden';
 import { ChiaraFerragni } from './pages/chiara-ferragni';
 import { HudaBeauty } from './pages/huda-beauty';
+import { VogaCloset } from './pages/voga-closet';
 
 (async () => {
 
     const start = new Date();
     const browser = await puppeteer.launch();
 
-    const scrapAll = true;
-    const selectedCategory: Category = Category.BEAUTY;
-    const selectedPage: string = Pages.FARFETCH;
+    const scrapAll = false;
+    const selectedCategory: Category = Category.TOPS;
+    const selectedPage: string = Pages.BERSHKA;
 
     if(scrapAll) {
         await scrapAllPages();
@@ -33,9 +34,9 @@ import { HudaBeauty } from './pages/huda-beauty';
         const categories = Object.values(Category);
         for(const page of pages) {
             for(const category of categories) {
-                console.log(`Running Category: "${category}", Page: "${page}"...`)
+                console.log(`Running Category: "${category}", Page: "${page}"...`);
                 await scrapSinglePage(page, category);
-                console.log(`Finished Category: "${category}", Page: "${page}"...`)
+                console.log(`Finished Category: "${category}", Page: "${page}"...`);
             }
         }
     }

@@ -4,8 +4,24 @@ import { ItemData } from "../models/item-data.model";
 import { BasePage } from "../core/base-page";
 import { Page } from "puppeteer/lib/cjs/puppeteer/common/Page";
 import { ScrapingParameters } from "../models/scrape-catalog-params";
+import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
+import { PageData } from "../models/page-data";
+import { delay } from "../utils/delay";
 
 export class RiverIsland extends BasePage {
+
+    async beforeScraping(browser: Browser, pageData: PageData) {
+        const setLocationUrl = 'https://www.riverisland.com/site/Picker';
+        const page = await getPage(browser, setLocationUrl);
+
+        console.log("setting location... (5sec)");
+        await page.select('#country', 'AE');
+        await page.evaluate(async () => {
+            (document.querySelector('button[class="button button-black button-has-icon"]') as HTMLButtonElement).click();
+        });
+        await page.screenshot({path: 'data/riverisland/screen.png'});
+        await delay(5000);
+    }
 
     async scrapeCatalog(params: ScrapingParameters): Promise<ItemData[]> {
         // extracts the urls
@@ -63,7 +79,7 @@ export class RiverIsland extends BasePage {
             }
 
             const cost = price.match(/\d+(\.\d+)/g).join('');
-            const currency = price.match(/[^\d,]/g).join('').replace(/\s+/, "");
+            const currency = price.match(/[^\d,.]/g).join('').replace(/\s+/, "");
             const title = (document.querySelector('h2[class="product-title ui-product-title"]') as HTMLElement).innerText;
 
             const itemData: ItemData = {

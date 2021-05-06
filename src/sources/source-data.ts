@@ -75,28 +75,28 @@ export const sourceData: Record<string, any> = {
         skirts: {
             urls: ["https://www.riverisland.com/search?keyword=skirts&f-division=women&pg="],
             filePath: "data/riverisland/data-skirts-riverisland.csv",
-            pagesQuantity: 1,
+            pagesQuantity: 2,
             hasPagination: true,
             requireAutoScroll: false
         },
         tops: {
             urls: ["https://www.riverisland.com/c/women/tops?pg="],
             filePath: "data/riverisland/data-tops-riverisland.csv",
-            pagesQuantity: 6,
+            pagesQuantity: 8,
             hasPagination: true,
             requireAutoScroll: false
         },
         pants: {
             urls: ["https://www.riverisland.com/search?keyword=pants&search-submit=&f-cat=nightwear-and-slippers&f-cat=trousers&f-division=women&pg="],
             filePath: "data/riverisland/data-pants-riverisland.csv",
-            pagesQuantity: 4,
+            pagesQuantity: 5,
             hasPagination: true,
             requireAutoScroll: false
         },
         dresses: {
             urls: ["https://www.riverisland.com/c/women/dresses?pg="],
             filePath: "data/riverisland/data-dresses-riverisland.csv",
-            pagesQuantity: 2,
+            pagesQuantity: 6,
             hasPagination: true,
             requireAutoScroll: false
         },
@@ -110,35 +110,35 @@ export const sourceData: Record<string, any> = {
         accessories: {
             urls: ["https://www.riverisland.com/c/women/accessories?pg="],
             filePath: "data/riverisland/data-accessories-riverisland.csv",
-            pagesQuantity: 2,
+            pagesQuantity: 3,
             hasPagination: true,
             requireAutoScroll: false
         },
         outwear: {
             urls: ["https://www.riverisland.com/c/women/coats-and-jackets?pg="],
             filePath: "data/riverisland/data-outwear-riverisland.csv",
-            pagesQuantity: 2,
+            pagesQuantity: 3,
             hasPagination: true,
             requireAutoScroll: false
         },
         knitwear: {
             urls: ["https://www.riverisland.com/search?keyword=knitwear&f-division=women&pg="],
             filePath: "data/riverisland/data-knitwear-riverisland.csv",
-            pagesQuantity: 5,
+            pagesQuantity: 8,
             hasPagination: true,
             requireAutoScroll: false
         },
         shoes: {
             urls: ["https://www.riverisland.com/search?keyword=shoes&search-submit=&f-division=women&pg="],
             filePath: "data/riverisland/data-shoes-riverisland.csv",
-            pagesQuantity: 6,
+            pagesQuantity: 8,
             hasPagination: true,
             requireAutoScroll: false
         },
         jeans: {
-            url: ["https://www.riverisland.com/c/women/jeans?pg="],
+            urls: ["https://www.riverisland.com/c/women/jeans?pg="],
             filePath: "data/riverisland/data-jeans-riverisland.csv",
-            pagesQuantity: 3,
+            pagesQuantity: 4,
             hasPagination: true,
             requireAutoScroll: false
         }
@@ -147,7 +147,7 @@ export const sourceData: Record<string, any> = {
         skirts: {
             urls: ["https://world.maxmara.com/clothing/skirts?page="],
             filePath: "data/maxmara/data-skirts-maxmara.csv",
-            pagesQuantity: 2,
+            pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
@@ -161,21 +161,21 @@ export const sourceData: Record<string, any> = {
         pants: {
             urls: ["https://world.maxmara.com/clothing/womens-trousers-and-jeans?page="],
             filePath: "data/maxmara/data-pants-maxmara.csv",
-            pagesQuantity: 7,
+            pagesQuantity: 5,
             hasPagination: true,
             requireAutoScroll: true
         },
         dresses: {
             urls: ["https://world.maxmara.com/clothing/womens-dresses?page="],
             filePath: "data/maxmara/data-dresses-maxmara.csv",
-            pagesQuantity: 7,
+            pagesQuantity: 6,
             hasPagination: true,
             requireAutoScroll: true
         },
         blazers: {
             urls: ["https://world.maxmara.com/coats-and-jackets/womens-jackets-and-blazers?page="],
             filePath: "data/maxmara/data-blazers-maxmara.csv",
-            pagesQuantity: 4,
+            pagesQuantity: 2,
             hasPagination: true,
             requireAutoScroll: true
         },
@@ -191,16 +191,16 @@ export const sourceData: Record<string, any> = {
             requireAutoScroll: true
         },
         outwear: {
-            urls: ["https://world.maxmara.com/coats-and-jackets/womens-down-jackets-and-padded-jackets?page="],
+            urls: ["https://world.maxmara.com/coats-and-jackets/womens-down-jackets-and-padded-jackets"],
             filePath: "data/maxmara/data-outwear-maxmara.csv",
-            pagesQuantity: 2,
-            hasPagination: true,
+            pagesQuantity: 1,
+            hasPagination: false,
             requireAutoScroll: true
         },
         knitwear: {
             urls: ["https://world.maxmara.com/clothing/womens-knitwear-sweaters?page="],
             filePath: "data/maxmara/data-knitwear-maxmara.csv",
-            pagesQuantity: 7,
+            pagesQuantity: 4,
             hasPagination: true,
             requireAutoScroll: true
         },
@@ -221,7 +221,9 @@ export const sourceData: Record<string, any> = {
     },
     steveMadden: {
         accessories: {
-            urls: ["https://stevemadden.me/collections/handbags-all-handbags?page="],
+            urls: [
+                "https://stevemadden.me/collections/handbags-all-handbags?page="
+            ],
             filePath: "data/stevemadden/data-accessories-stevemadden.csv",
             pagesQuantity: 4,
             hasPagination: true,
@@ -230,77 +232,77 @@ export const sourceData: Record<string, any> = {
         shoes: {
             urls: ["https://stevemadden.me/collections/womens?page="],
             filePath: "data/stevemadden/data-shoes-stevemadden.csv",
-            pagesQuantity: 5,
+            pagesQuantity: 7,
             hasPagination: true,
             requireAutoScroll: true
         },
     },
     bershka: {
         skirts: {
-            urls: ["https://www.bershka.com/ww/women/clothes/skirts-c1010193224.html?page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/skirts-c1010193224.html?page="],
             filePath: "data/bershka/data-skirts-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         tops: {
-            urls: ["https://www.bershka.com/ww/women/clothes/t-shirts-and-tops-c1010193217.html?page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/t-shirts-and-tops-c1010193217.html?page="],
             filePath: "data/bershka/data-tops-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         pants: {
-            urls: ["https://www.bershka.com/ww/women/clothes/trousers-c1010193216.html?page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/trousers-c1010193216.html?page="],
             filePath: "data/bershka/data-pants-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         dresses: {
-            urls: ["https://www.bershka.com/ww/women/clothes/dresses-c1010193213.html?page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/dresses-c1010193213.html?page="],
             filePath: "data/bershka/data-dresses-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         blazers: {
-            urls: ["https://www.bershka.com/ww/women/clothes/blazers-c1010205537.html?page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/blazers-c1010205537.html?page="],
             filePath: "data/bershka/data-blazers-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         accessories: {
-            urls: ["https://www.bershka.com/ww/women/accessories-c1010193134.html?page="],
+            urls: ["https://www.bershka.com/ae/women/accessories-c1010193134.html?page="],
             filePath: "data/bershka/data-accessories-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         outwear: {
-            urls: ["https://www.bershka.com/ww/women/clothes/jackets-and-coats-c1010193212.html?tipology=1010193261&page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/jackets-and-coats-c1010193212.html?tipology=1010193261&page="],
             filePath: "data/bershka/data-outwear-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         knitwear: {
-            urls: ["https://www.bershka.com/ww/q/knitwear?page="],
+            urls: ["https://www.bershka.com/ae/q/knitwear?page="],
             filePath: "data/bershka/data-knitwear-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         shoes: {
-            urls: ["https://www.bershka.com/ww/women/shoes-c1010193192.html?page="],
+            urls: ["https://www.bershka.com/ae/women/shoes-c1010193192.html?page="],
             filePath: "data/bershka/data-shoes-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
             requireAutoScroll: true
         },
         jeans: {
-            urls: ["https://www.bershka.com/ww/women/clothes/jeans-c1010276029.html?page="],
+            urls: ["https://www.bershka.com/ae/women/clothes/jeans-c1010276029.html?page="],
             filePath: "data/bershka/data-jeans-bershka.csv",
             pagesQuantity: 1,
             hasPagination: true,
@@ -309,7 +311,7 @@ export const sourceData: Record<string, any> = {
     },
     fendi: {
         skirts: {
-            urls: ["https://www.fendi.com/ae/search-results?q=skirt"],
+            urls: ["https://www.fendi.com/ae/search-results?q=skirt&page=1&preload=true"],
             filePath: "data/fendi/data-skirts-fendi.csv",
             pagesQuantity: 1,
             hasPagination: false,
@@ -377,19 +379,19 @@ export const sourceData: Record<string, any> = {
             hasPagination: false,
         },
         tops: {
-            urls: ["https://row.chiaraferragnicollection.com/collections/top-t-shirt?_usf_take=32"],
+            urls: ["https://row.chiaraferragnicollection.com/collections/top-t-shirt?usf_take=48"],
             filePath: "data/chiaraferragni/data-tops-chiaraferragni.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         pants: {
-            urls: ["https://row.chiaraferragnicollection.com/collections/pants-shorts?_usf_take=32"],
+            urls: ["https://row.chiaraferragnicollection.com/collections/pants-shorts?usf_take=48"],
             filePath: "data/chiaraferragni/data-pants-chiaraferragni.csv",
             pagesQuantity: 1,
             hasPagination: false,
         },
         dresses: {
-            urls: ["https://row.chiaraferragnicollection.com/collections/dresses?_usf_take=32"],
+            urls: ["https://row.chiaraferragnicollection.com/collections/dresses"],
             filePath: "data/chiaraferragni/data-dresses-chiaraferragni.csv",
             pagesQuantity: 1,
             hasPagination: false,
@@ -401,12 +403,7 @@ export const sourceData: Record<string, any> = {
             hasPagination: false,
         },
         accessories: {
-            urls: [
-                "https://row.chiaraferragnicollection.com/collections/bags-bagpacks?_usf_take=32",
-                "https://row.chiaraferragnicollection.com/collections/small-leather-goods?_usf_take=32",
-                "https://row.chiaraferragnicollection.com/collections/belts",
-                "https://row.chiaraferragnicollection.com/collections/socks",
-            ],
+            urls: ["https://row.chiaraferragnicollection.com/collections/accessories?usf_take=112"],
             filePath: "data/chiaraferragni/data-accessories-chiaraferragni.csv",
             pagesQuantity: 1,
             hasPagination: false,
@@ -424,12 +421,7 @@ export const sourceData: Record<string, any> = {
             hasPagination: false,
         },
         shoes: {
-            urls: [
-                "https://row.chiaraferragnicollection.com/collections/sneakers",
-                "https://row.chiaraferragnicollection.com/collections/ballerinas",
-                "https://row.chiaraferragnicollection.com/collections/pump",
-                "https://row.chiaraferragnicollection.com/collections/sliders"
-            ],
+            urls: ["https://row.chiaraferragnicollection.com/collections/shoes?usf_take=48"],
             filePath: "data/chiaraferragni/data-shoes-chiaraferragni.csv",
             pagesQuantity: 1,
             hasPagination: false,
@@ -443,7 +435,13 @@ export const sourceData: Record<string, any> = {
     },
     hudabeauty: {
         beauty: {
-            urls: ["https://hudabeauty.com/en_AE/search/updategrid?cgid=makeup&start=0&sz=126"],
+            urls: [
+                "https://hudabeauty.com/en_AE/search/updategrid?cgid=makeup&start=0&sz=126",
+                "https://hudabeauty.com/en_AE/search/updategrid?cgid=shop-minis&start=0&sz=25",
+                "https://hudabeauty.com/en_AE/search/updategrid?cgid=kayali-category&start=0&sz=24",
+                "https://hudabeauty.com/en_AE/search/updategrid?cgid=wishful&start=0&sz=34",
+                "https://hudabeauty.com/en_AE/search/updategrid?cgid=Exclusives&start=0&sz=42"
+            ],
             filePath: "data/hudabeauty/data-beauty-hudabeauty.csv",
             pagesQuantity: 1,
             hasPagination: false,
