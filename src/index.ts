@@ -1,107 +1,99 @@
-import puppeteer from 'puppeteer';
-import { Page } from 'puppeteer/lib/cjs/puppeteer/common/Page';
-import { Category } from './enum/category.enum';
-import { Pages } from './enum/pages.enum';
-import { sourceData } from './sources/source-data';
-import { PageData } from './models/page-data';
-import { Bershka } from './pages/bershka';
-import { Farfetch } from './pages/farfetch';
-import { Fendi } from './pages/fendi';
-import { MaxMara } from './pages/max-mara';
-import { RiverIsland } from './pages/river-island';
-import { SteveMadden } from './pages/steve-madden';
-import { ChiaraFerragni } from './pages/chiara-ferragni';
-import { HudaBeauty } from './pages/huda-beauty';
-import { VogaCloset } from './pages/voga-closet';
+import { Category } from "./enum/category.enum";
+import { Pages } from "./enum/pages.enum";
+import { sourceData } from "./sources/source-data";
+import { PageData } from "./models/page-data";
+import { Bershka } from "./pages/bershka";
+import { Farfetch } from "./pages/farfetch";
+import { Fendi } from "./pages/fendi";
+import { MaxMara } from "./pages/max-mara";
+import { RiverIsland } from "./pages/river-island";
+import { SteveMadden } from "./pages/steve-madden";
+import { ChiaraFerragni } from "./pages/chiara-ferragni";
+import { HudaBeauty } from "./pages/huda-beauty";
+import { launchPuppeteer } from "./utils/browser";
+import { BasePage } from "./core/base-page";
+import { Browser } from "puppeteer/lib/cjs/puppeteer/common/Browser";
 
-(async () => {
+class Main {
 
+	private browser: Browser;
+
+  public async run() {
     const start = new Date();
-    const browser = await puppeteer.launch();
+		this.browser = await launchPuppeteer();
 
-    const scrapAll = false;
-    const selectedCategory: Category = Category.TOPS;
-    const selectedPage: string = Pages.BERSHKA;
+    const scrapAll = true;
+    const selectedCategory: Category = Category.JEANS;
+		const selectedPage: string = Pages.FARFETCH;
 
-    if(scrapAll) {
-        await scrapAllPages();
-    }else {
-        await scrapSinglePage(selectedPage, selectedCategory);
-    }
+    if (scrapAll) {
+      await this.scrapAllPages();
+    } else {
+      await this.scrapSinglePage(selectedPage, selectedCategory);
+		}
 
-    async function scrapAllPages() {
-        const pages = Object.values(Pages);
-        const categories = Object.values(Category);
-        for(const page of pages) {
-            for(const category of categories) {
-                console.log(`Running Category: "${category}", Page: "${page}"...`);
-                await scrapSinglePage(page, category);
-                console.log(`Finished Category: "${category}", Page: "${page}"...`);
-            }
-        }
-    }
-
-    async function scrapSinglePage(page: string, category: Category) {
-
-        const pageData: PageData = sourceData[page][category];
-
-        if(pageData) {
-            switch(selectedPage) {
-                case Pages.FARFETCH: {
-                    const page = new Farfetch();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                case Pages.RIVERISLAND: {
-                    const page = new RiverIsland();
-                    await page.scrap(browser, category, pageData);
-                   break;
-                }
-                case Pages.MAXMARA: {
-                    const page = new MaxMara();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                case Pages.STEVEMADDEN: {
-                    const page = new SteveMadden();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                case Pages.BERSHKA: {
-                    const page = new Bershka();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                case Pages.FENDI: {
-                    const page = new Fendi();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                case Pages.CHIARAFERRAGNI: {
-                    const page = new ChiaraFerragni();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                case Pages.HUDABEAUTY: {
-                    const page = new HudaBeauty();
-                    await page.scrap(browser, category, pageData);
-                    break;
-                }
-                default: {
-                   console.log("no option selected")
-                   break;
-                }
-            }
-        } else {
-            console.log(`The category "${category}" does not exist in "${page}" page.`);
-        }
-
-    }
-
+		await this.browser.close();
 
     const end = new Date();
     const duration = (end.valueOf() - start.valueOf()) / 1000;
     console.log("total duration in seconds: " + duration);
+  }
 
-    await browser.close();
-})();
+  getPageByName = (pageName: string) => {
+    switch (pageName) {
+      case Pages.FARFETCH:
+        return new Farfetch();
+      case Pages.RIVERISLAND:
+        return new RiverIsland();
+      case Pages.MAXMARA:
+        return new MaxMara();
+      case Pages.STEVEMADDEN:
+        return new SteveMadden();
+      case Pages.BERSHKA:
+        return new Bershka();
+      case Pages.FENDI:
+        return new Fendi();
+      case Pages.CHIARAFERRAGNI:
+        return new ChiaraFerragni();
+      case Pages.HUDABEAUTY:
+        return new HudaBeauty();
+      default:
+        throw Error("no page selected");
+    }
+  };
+
+  scrapAllPages = async () => {
+		// TODO: do something more efficient here
+    for (const page of Object.values(Pages)) {
+      for (const category of Object.values(Category)) {
+        try {
+					console.log(`Running Category: "${category}", Page: "${page}"...`);
+          await this.scrapSinglePage(page, category);
+        } catch (e) {
+          console.log(`An error ocurred scraping "${category}" category in "${page}" page.`);
+          console.log(e);
+        }
+				console.log(
+					`Finished Category:
+					"${category}", Page: "${page}"...`
+				);
+      }
+    }
+  };
+
+  scrapSinglePage = async (
+    pageName: string,
+    category: Category
+  ) => {
+    const pageData: PageData = sourceData[pageName][category];
+    if (pageData) {
+      const pageSelected: BasePage = this.getPageByName(pageName);
+      await pageSelected.scrap(this.browser, category, pageData);
+    } else {
+      console.log(`The category "${category}" does not exist in "${pageName}" page.`);
+    }
+  };
+}
+
+const main = new Main();
+main.run();

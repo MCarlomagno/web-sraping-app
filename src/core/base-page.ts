@@ -18,8 +18,12 @@ export abstract class BasePage {
 
         console.log("pages quantity: " + pageData.pagesQuantity);
         console.log("page urls: " + pageData.urls);
+        try {
+            await this.beforeScraping(browser, pageData);
+        } catch(e) {
+            console.log("an error ocurred trying to run beforeScraping");
+        }
 
-        await this.beforeScraping(browser, pageData);
 
         while(pageNumber <= pageData.pagesQuantity) {
             try {
