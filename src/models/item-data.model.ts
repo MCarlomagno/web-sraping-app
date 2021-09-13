@@ -4,4 +4,6 @@ export interface ItemData {
     title: string;
     cost: string;
     currency: string;
+    brandName?: string;
+    categoryName?: string;
 }

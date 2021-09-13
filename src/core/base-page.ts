@@ -8,12 +8,15 @@ import { ItemData } from "../models/item-data.model";
 import { PageData } from "../models/page-data";
 import fs from 'fs';
 import { ScrapingParameters } from "../models/scrape-catalog-params";
+import { ApiService } from "../services/api.service";
+import { getCategoryName, getBrandName } from "../utils/format";
 
 export abstract class BasePage {
+    api: ApiService = new ApiService();
     content: ItemData[] = [];
     opts = { fields: ['title', 'url', 'cost', 'currency', 'pictureURL'] };
 
-    async scrap(browser: Browser, category: Category, pageData: PageData) {
+    async scrap(browser: Browser, category: Category, pageData: PageData, pageName: string) {
         let pageNumber = 1;
 
         console.log("pages quantity: " + pageData.pagesQuantity);
@@ -58,6 +61,16 @@ export abstract class BasePage {
 
             pageNumber++;
         }
+    }
+
+    async upload(items: ItemData[], category: Category, pageName: string) {
+        const categoryName = getCategoryName(category);
+        const brandName = getBrandName(pageName);
+        items.forEach(item => {
+            item.brandName = brandName;
+            item.categoryName = categoryName;
+        })
+        await this.api.uploadItems(items);
     }
 
     abstract scrapeCatalog(params: ScrapingParameters): Promise<ItemData[]>;

@@ -22,9 +22,9 @@ class Main {
     const start = new Date();
 		this.browser = await launchPuppeteer();
 
-    const scrapAll = true;
+    const scrapAll = false;
     const selectedCategory: Category = Category.JEANS;
-		const selectedPage: string = Pages.FARFETCH;
+		const selectedPage: string = Pages.CHIARAFERRAGNI;
 
     if (scrapAll) {
       await this.scrapAllPages();
@@ -63,21 +63,20 @@ class Main {
   };
 
   scrapAllPages = async () => {
-		// TODO: do something more efficient here
     for (const page of Object.values(Pages)) {
-      for (const category of Object.values(Category)) {
-        try {
-					console.log(`Running Category: "${category}", Page: "${page}"...`);
-          await this.scrapSinglePage(page, category);
-        } catch (e) {
-          console.log(`An error ocurred scraping "${category}" category in "${page}" page.`);
-          console.log(e);
-        }
-				console.log(
-					`Finished Category:
-					"${category}", Page: "${page}"...`
-				);
-      }
+      await Promise.all([
+        this.scrapSinglePage(page, Category.ACCESSORIES).catch(error => error ),
+				this.scrapSinglePage(page, Category.BEAUTY).catch(error => error ),
+				this.scrapSinglePage(page, Category.BLAZERS).catch(error => error ),
+				this.scrapSinglePage(page, Category.DRESSES).catch(error => error ),
+				this.scrapSinglePage(page, Category.JEANS).catch(error => error ),
+				this.scrapSinglePage(page, Category.KNITWEAR).catch(error => error ),
+				this.scrapSinglePage(page, Category.OUTWEAR).catch(error => error ),
+				this.scrapSinglePage(page, Category.PANTS).catch(error => error ),
+				this.scrapSinglePage(page, Category.SHOES).catch(error => error ),
+				this.scrapSinglePage(page, Category.SKIRTS).catch(error => error ),
+				this.scrapSinglePage(page, Category.TOPS).catch(error => error ),
+			]);
     }
   };
 
@@ -85,10 +84,16 @@ class Main {
     pageName: string,
     category: Category
   ) => {
+		console.log(`Scraping Category: "${category}", Page: "${pageName}"...`)
     const pageData: PageData = sourceData[pageName][category];
     if (pageData) {
-      const pageSelected: BasePage = this.getPageByName(pageName);
-      await pageSelected.scrap(this.browser, category, pageData);
+			try {
+				const pageSelected: BasePage = this.getPageByName(pageName);
+				await pageSelected.scrap(this.browser, category, pageData, pageName);
+			} catch(err) {
+				console.log(`An error ocurred scraping "${category}" category in "${pageName}" page.`);
+			}
+
     } else {
       console.log(`The category "${category}" does not exist in "${pageName}" page.`);
     }
